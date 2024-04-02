@@ -6,13 +6,13 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 11:07:17 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/02 11:48:02 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/02 16:01:32 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	init_philos(t_philo *philos, pthread_mutex_t *forks, char *argv, t_program *program)
+void	init_philos(t_philo *philos, pthread_mutex_t *forks, char **argv, t_program *program)
 {
 	int	i;
 
@@ -23,7 +23,7 @@ void	init_philos(t_philo *philos, pthread_mutex_t *forks, char *argv, t_program 
 		philos[i].time_to_die = ft_atoi(argv[2]).num;
 		philos[i].time_to_eat = ft_atoi(argv[3]).num;
 		philos[i].time_to_sleep = ft_atoi(argv[4]).num;
-		philos[i].id = i;
+		philos[i].id = i + 1;
 		philos[i].meals_eaten = 0;
 		philos[i].eating = 0;
 		philos[i].l_fork = &forks[i];

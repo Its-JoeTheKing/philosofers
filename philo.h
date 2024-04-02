@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:20:24 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/01 14:56:16 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/02 16:01:37 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ size_t	timestamp(void);
 void	ft_usleep(int n);
 int		check_input(char **str, int ac);
 t_num	ft_atoi(const char *str);
+void	init_philos(t_philo *philos, pthread_mutex_t *forks, char **argv, t_program *program);
+void	init_prog(t_philo *philos, t_program *program, pthread_mutex_t *forks);
 
 #endif
