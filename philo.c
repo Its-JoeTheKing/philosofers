@@ -6,52 +6,28 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/02 16:59:28 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/16 16:06:40 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_message(char *str, t_philo *philo, int id)
-{
-	size_t	time;
-
-	// pthread_mutex_lock(philo->write_lock);
-	time = timestamp() - philo->start_time;
-	printf("%zu %d %s\n", time, id, str);
-	// pthread_mutex_unlock(philo->write_lock);
-}
-
-void	*dream(void	*ph)
-{
-	t_philo	*philo;
-	philo = (t_philo *)ph;
-	print_message("philo is sleeping", philo, philo->id);
-	return (0);
-}
-void	*eating(void	*ph)
-{
-	t_philo	*philo;
-	philo = (t_philo *)ph;
-	print_message("philo is eating", philo, philo->id);
-	return (0);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_philo			philos[PHILO_MAX];
 	t_program		program;
-	pthread_mutex_t	forks[PHILO_MAX];
-
+	pthread_t		monitor;
+	int				i;
+	
+	i = 0;
 	if (!check_input(argv, argc))
 		return (-1);
-	init_prog(philos, &program, forks);
-	init_philos(philos, forks, argv, &program);
-	int i = 0;
+	init_program(argv, &program);
+	init_philos(philos, argv, &program);
+	pthread_create(&monitor, NULL, monitoring, &program);
 	while (i < ft_atoi(argv[1]).num)
 	{
-		pthread_create(&philos[i].thread, NULL, dream, &philos[i]);
-		pthread_create(&philos[i].thread, NULL, eating, &philos[i]);
+		pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
 		i++;
 	}
 	i = 0;
@@ -60,4 +36,32 @@ int	main(int argc, char *argv[])
 		pthread_join(philos[i].thread, NULL);
 		i++;
 	}
+	pthread_join(monitor, NULL);
+	return (0);
+}
+
+void	*monitoring(void *ph)
+{
+	t_program	*data;
+	int	i;
+
+	data = (t_program *)ph;
+	i = 0;
+	while (1337)
+	{
+		i = 0;
+		while (i < data->philos[0].num_of_philos)
+		{
+			if (timestamp() - data->philos[i].last_meal >= data->philos[i].time_to_die)
+			{
+				pthread_mutex_lock(data->philos[i].dead_lock);
+				data->dead_flag = 1;
+				pthread_mutex_unlock(data->philos[i].dead_lock);
+				printf("%lu %d is died\n", timestamp() - data->philos[0].start_time, i + 1);
+				return (0);
+			}
+			i++;
+		}
+	}
+	return (0);
 }
