@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:03:37 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/18 16:11:28 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/18 16:35:16 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ void	*routine(void *ph)
 	philo = (t_philo *)ph;
 	if (philo->id % 2 == 0)
 		ft_usleep(15);
+	// pthread_mutex_lock(philo->dead_lock);
 	while (*(philo->dead) == 0)
 	{
 		eat(philo);
 		dream(philo);
 	}
+	// pthread_mutex_unlock(philo->dead_lock);
 	return (0);
 }

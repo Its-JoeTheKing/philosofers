@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/18 16:11:50 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/18 16:33:26 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	*monitoring(void *ph)
 		i = 0;
 		while (i < data->philos[0].num_of_philos)
 		{
+			pthread_mutex_lock(data->philos[i].meal_lock);
 			if (timestamp() - data->philos[i].last_meal > data->philos[i].time_to_die)
 			{
 				pthread_mutex_lock(data->philos[i].dead_lock);
@@ -60,6 +61,7 @@ void	*monitoring(void *ph)
 				write_message(&data->philos[i], "is dead");
 				return (0);
 			}
+			pthread_mutex_unlock(data->philos[i].meal_lock);
 			i++;
 		}
 	}
