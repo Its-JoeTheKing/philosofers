@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:03:37 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/16 18:41:13 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/18 12:37:56 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,7 @@ void	dream(t_philo *philo)
 {
 	write_message(philo, "is sleeping");
 	ft_usleep(philo->time_to_sleep);
-}
-
-void	think(t_philo *philo)
-{
 	write_message(philo, "is thinking");
-	ft_usleep(philo->time_to_sleep);
 }
 
 void	eat(t_philo *philo)
@@ -40,10 +35,10 @@ void	eat(t_philo *philo)
 	write_message(philo, "is eating");
 	philo->eating = 1;
 	pthread_mutex_lock(philo->meal_lock);
-	philo->meals_eaten++;
 	philo->last_meal = timestamp();
 	pthread_mutex_unlock(philo->meal_lock);
 	ft_usleep(philo->time_to_eat);
+	philo->meals_eaten++;
 	philo->eating = 0;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
@@ -55,12 +50,11 @@ void	*routine(void *ph)
 
 	philo = (t_philo *)ph;
 	if (philo->id % 2 == 0)
-		ft_usleep(1);
+		ft_usleep(15);
 	while (*(philo->dead) == 0)
 	{
 		eat(philo);
 		dream(philo);
-		think(philo);
 	}
 	return (0);
 }

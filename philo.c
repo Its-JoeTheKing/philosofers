@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/16 16:06:40 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/17 19:00:39 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char *argv[])
 	i = 0;
 	while (i < ft_atoi(argv[1]).num)
 	{
-		pthread_join(philos[i].thread, NULL);
+		pthread_detach(philos[i].thread);
 		i++;
 	}
 	pthread_join(monitor, NULL);
@@ -47,17 +47,17 @@ void	*monitoring(void *ph)
 
 	data = (t_program *)ph;
 	i = 0;
-	while (1337)
+	while (15)
 	{
 		i = 0;
 		while (i < data->philos[0].num_of_philos)
 		{
-			if (timestamp() - data->philos[i].last_meal >= data->philos[i].time_to_die)
+			if (timestamp() - data->philos[i].last_meal > data->philos[i].time_to_die && !data->philos[i].eating)
 			{
 				pthread_mutex_lock(data->philos[i].dead_lock);
 				data->dead_flag = 1;
 				pthread_mutex_unlock(data->philos[i].dead_lock);
-				printf("%lu %d is died\n", timestamp() - data->philos[0].start_time, i + 1);
+				write_message(&data->philos[i], "is dead");
 				return (0);
 			}
 			i++;

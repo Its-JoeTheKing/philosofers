@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:32:00 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/01 14:51:57 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/17 18:58:09 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	ft_usleep(int n)
 
 	time = timestamp();
 	while (time + n > timestamp())
-		wait(NULL);
+		usleep(50);
 }
