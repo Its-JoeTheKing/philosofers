@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:03:37 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/18 16:38:25 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/18 16:43:51 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	*routine(void *ph)
 	int		is_dead;
 
 	philo = (t_philo *)ph;
+	is_dead = 0;
 	if (philo->id % 2 == 0)
 		ft_usleep(15);
 	while (!is_dead)
