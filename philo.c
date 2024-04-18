@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/18 16:33:26 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/18 16:51:38 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 	pthread_join(monitor, NULL);
+	pthread_mutex_destroy(&program.dead_lock);
+	pthread_mutex_destroy(&program.meal_lock);
+	pthread_mutex_destroy(&program.write_lock);
+	i = 0;
+	while (i)
+	{
+		pthread_mutex_destroy(&program.forks[i]);
+		i++;
+	}
 	return (0);
 }
 
