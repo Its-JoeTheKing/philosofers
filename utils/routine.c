@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:03:37 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/18 12:37:56 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/18 13:00:46 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	eat(t_philo *philo)
 	philo->eating = 1;
 	pthread_mutex_lock(philo->meal_lock);
 	philo->last_meal = timestamp();
-	pthread_mutex_unlock(philo->meal_lock);
-	ft_usleep(philo->time_to_eat);
 	philo->meals_eaten++;
+	ft_usleep(philo->time_to_eat);
+	pthread_mutex_unlock(philo->meal_lock);
 	philo->eating = 0;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
