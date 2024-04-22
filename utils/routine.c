@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:03:37 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/18 16:43:51 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/22 18:05:54 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,28 @@ void	eat(t_philo *philo)
 	pthread_mutex_unlock(philo->r_fork);
 }
 
+int	check_death(t_philo *philo)
+{
+	int	is_dead = 0;
+	
+	pthread_mutex_lock(philo->dead_lock);
+	is_dead = *(philo->dead);
+	pthread_mutex_unlock(philo->dead_lock);
+	return (is_dead);
+}
+
 void	*routine(void *ph)
 {
 	t_philo	*philo;
-	int		is_dead;
 
 	philo = (t_philo *)ph;
-	is_dead = 0;
 	if (philo->id % 2 == 0)
-		ft_usleep(15);
-	while (!is_dead)
+		ft_usleep(100);
+	while (!check_death(philo))
 	{
-		pthread_mutex_lock(philo->dead_lock);
-		is_dead = *(philo->dead);
-		pthread_mutex_unlock(philo->dead_lock);
 		eat(philo);
 		dream(philo);
+		printf("%d\n", check_death(philo));
 	}
 	return (0);
 }

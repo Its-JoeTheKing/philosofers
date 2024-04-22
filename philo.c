@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/18 16:51:38 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/22 18:10:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,29 @@ int	main(int argc, char *argv[])
 	while (i < ft_atoi(argv[1]).num)
 	{
 		pthread_detach(philos[i].thread);
+		// pthread_join(philos[i].thread, NULL);
 		i++;
 	}
 	pthread_join(monitor, NULL);
-	pthread_mutex_destroy(&program.dead_lock);
-	pthread_mutex_destroy(&program.meal_lock);
-	pthread_mutex_destroy(&program.write_lock);
-	i = 0;
-	while (i)
-	{
-		pthread_mutex_destroy(&program.forks[i]);
-		i++;
-	}
 	return (0);
 }
 
 void	*monitoring(void *ph)
 {
 	t_program	*data;
+	int			is_it = 0;
 	int	i;
 
 	data = (t_program *)ph;
-	i = 0;
 	while (15)
 	{
 		i = 0;
 		while (i < data->philos[0].num_of_philos)
 		{
 			pthread_mutex_lock(data->philos[i].meal_lock);
-			if (timestamp() - data->philos[i].last_meal > data->philos[i].time_to_die)
+			is_it = timestamp() - data->philos[i].last_meal > data->philos[i].time_to_die;
+			pthread_mutex_unlock(data->philos[i].meal_lock);
+			if (is_it)
 			{
 				pthread_mutex_lock(data->philos[i].dead_lock);
 				data->dead_flag = 1;
@@ -70,7 +64,6 @@ void	*monitoring(void *ph)
 				write_message(&data->philos[i], "is dead");
 				return (0);
 			}
-			pthread_mutex_unlock(data->philos[i].meal_lock);
 			i++;
 		}
 	}
