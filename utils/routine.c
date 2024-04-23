@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:03:37 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/22 18:05:54 by codespace        ###   ########.fr       */
+/*   Updated: 2024/04/23 10:57:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	write_message(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(philo->write_lock);
-	printf("%ld %d %s\n", timestamp() - philo->start_time, philo->id, msg);
+	if (!check_death(philo))
+		printf("%ld %d %s\n", timestamp() - philo->start_time, philo->id, msg);
 	pthread_mutex_unlock(philo->write_lock);
 }
 
@@ -33,12 +34,10 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(philo->l_fork);
 	write_message(philo, "has taken a fork");
 	write_message(philo, "is eating");
-	// philo->eating = 1;
 	pthread_mutex_lock(philo->meal_lock);
 	philo->last_meal = timestamp();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(philo->meal_lock);
-	// philo->eating = 0;
 	ft_usleep(philo->time_to_eat);
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
@@ -46,12 +45,11 @@ void	eat(t_philo *philo)
 
 int	check_death(t_philo *philo)
 {
-	int	is_dead = 0;
-	
 	pthread_mutex_lock(philo->dead_lock);
-	is_dead = *(philo->dead);
+	if (*(philo->dead))
+		return (pthread_mutex_unlock(philo->dead_lock), 1);
 	pthread_mutex_unlock(philo->dead_lock);
-	return (is_dead);
+	return (0);
 }
 
 void	*routine(void *ph)
@@ -65,7 +63,6 @@ void	*routine(void *ph)
 	{
 		eat(philo);
 		dream(philo);
-		printf("%d\n", check_death(philo));
 	}
 	return (0);
 }

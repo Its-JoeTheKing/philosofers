@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   timing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:32:00 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/17 18:58:09 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/23 10:47:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	ft_usleep(int n)
 
 	time = timestamp();
 	while (time + n > timestamp())
-		usleep(50);
+		usleep(500);
 }

@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/22 18:10:45 by codespace        ###   ########.fr       */
+/*   Updated: 2024/04/23 10:59:44 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,16 @@ int	main(int argc, char *argv[])
 		return (-1);
 	init_program(argv, &program);
 	init_philos(philos, argv, &program);
-	pthread_create(&monitor, NULL, monitoring, &program);
-	while (i < ft_atoi(argv[1]).num)
+	while (i < philos[0].num_of_philos)
 	{
 		pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
 		i++;
 	}
+	pthread_create(&monitor, NULL, monitoring, &program);
 	i = 0;
-	while (i < ft_atoi(argv[1]).num)
+	while (i < philos[0].num_of_philos)
 	{
-		pthread_detach(philos[i].thread);
-		// pthread_join(philos[i].thread, NULL);
+		pthread_join(philos[i].thread, NULL);
 		i++;
 	}
 	pthread_join(monitor, NULL);
@@ -44,7 +43,6 @@ int	main(int argc, char *argv[])
 void	*monitoring(void *ph)
 {
 	t_program	*data;
-	int			is_it = 0;
 	int	i;
 
 	data = (t_program *)ph;
@@ -54,16 +52,17 @@ void	*monitoring(void *ph)
 		while (i < data->philos[0].num_of_philos)
 		{
 			pthread_mutex_lock(data->philos[i].meal_lock);
-			is_it = timestamp() - data->philos[i].last_meal > data->philos[i].time_to_die;
-			pthread_mutex_unlock(data->philos[i].meal_lock);
-			if (is_it)
+			if (timestamp() - data->philos[i].last_meal > data->philos[i].time_to_die)
 			{
 				pthread_mutex_lock(data->philos[i].dead_lock);
 				data->dead_flag = 1;
 				pthread_mutex_unlock(data->philos[i].dead_lock);
-				write_message(&data->philos[i], "is dead");
-				return (0);
+				pthread_mutex_lock(data->philos[i].write_lock);
+				printf("%ld %d is dead\n", timestamp() - data->philos[i].start_time, data->philos[0].id);
+				pthread_mutex_unlock(data->philos[i].write_lock);
+				return (pthread_mutex_unlock(data->philos[i].meal_lock), (void *)0);
 			}
+			pthread_mutex_unlock(data->philos[i].meal_lock);
 			i++;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:20:24 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/16 15:46:13 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/23 10:47:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ void	init_philos(t_philo *philos, char **argv, t_program *program);
 void	*routine(void *ph);
 void	*monitoring(void *ph);
 void	write_message(t_philo *philo, char *msg);
-int		check_dies(t_philo *philos);
+int		check_death(t_philo *philo);
 
 #endif
