@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 14:29:20 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/02 11:03:30 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/25 15:16:25 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ t_num	ft_atoi(const char *str)
 	i = 0;
 	res.num = 0;
 	res.is_flow = 0;
+	if (!str)
+		return ((t_num){0, 0});
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res.num *= 10;
 		res.num += str[i++] - '0';
-		if (res.num > 2147483647)
+		if (res.num > 2147483647 || res.num < -2147483648)
 			res.is_flow = 1;
 	}
 	return ((t_num){res.num, res.is_flow});
@@ -37,7 +39,7 @@ int	check_str(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] < '0' || str[i] > '9')
+		if ((str[i] < '0' || str[i] > '9'))
 			return (0);
 		i++;
 	}

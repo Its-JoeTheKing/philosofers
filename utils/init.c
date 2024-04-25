@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 11:36:19 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/16 15:46:50 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/25 10:45:31 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init_philos(t_philo *philos, char **argv, t_program *program)
 		philos[i].time_to_die = ft_atoi(argv[2]).num;
 		philos[i].time_to_eat = ft_atoi(argv[3]).num;
 		philos[i].time_to_sleep = ft_atoi(argv[4]).num;
+		philos[i].max_meals = ft_atoi(argv[5]).num;
 		philos[i].start_time = timestamp();
 		philos[i].last_meal = timestamp();
 		philos[i].meals_eaten = 0;

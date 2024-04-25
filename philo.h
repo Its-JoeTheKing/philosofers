@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:20:24 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/23 10:47:50 by codespace        ###   ########.fr       */
+/*   Updated: 2024/04/25 15:10:39 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <pthread.h>
 
 # ifndef PHILO_MAX
-#  define PHILO_MAX 300
+#  define PHILO_MAX 200
 # endif
 
 typedef struct s_num
@@ -34,6 +34,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				id;
 	int				eating;
+	int				max_meals;
 	int				meals_eaten;
 	size_t			last_meal;
 	size_t			time_to_die;
