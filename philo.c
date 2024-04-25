@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/25 15:44:42 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/25 14:53:46 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_all_ates(t_philo *philos)
 
 	i = 0;
 	if (philos[0].max_meals == 0)
-		return (philos[0].num_of_philos);
+		return (0);
 	while ((i < philos[0].num_of_philos)
 		&& (philos[i].max_meals <= philos[i].meals_eaten))
 		i++;
