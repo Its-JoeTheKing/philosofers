@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 11:36:19 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/25 10:45:31 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/26 10:55:43 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,4 @@ void	init_philos(t_philo *philos, char **argv, t_program *program)
 		philos[i].dead_lock = &program->dead_lock;
 		philos[i].meal_lock = &program->meal_lock;
 	}
-	program->philos = philos;
 }

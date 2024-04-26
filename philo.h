@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:20:24 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/25 15:10:39 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/26 11:24:57 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,9 @@ void	*routine(void *ph);
 void	*monitoring(void *ph);
 void	write_message(t_philo *philo, char *msg);
 int		check_death(t_philo *philo);
+int		check_all_ates(t_philo *philos);
+void	raise_flag(t_program *data, int i, int dead);
+void	starting_sim(t_program *data);
+void	destroy_all(t_program *data);
 
 #endif
