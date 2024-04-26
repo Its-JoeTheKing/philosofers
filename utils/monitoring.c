@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 11:03:49 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/26 11:11:29 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/26 11:52:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	*monitoring(void *ph)
+int	monitoring(t_program *data)
 {
-	t_program	*data;
 	int			i;
 	size_t		time;
 
-	data = (t_program *)ph;
 	while (1)
 	{
 		i = 0;
@@ -30,7 +28,7 @@ void	*monitoring(void *ph)
 					|| check_all_ates(data->philos)) && !data->philos[i].eating)
 			{
 				raise_flag(data, i, (time > data->philos[i].time_to_die));
-				return ((void *)0);
+				return (0);
 			}
 			pthread_mutex_unlock(data->philos[i].meal_lock);
 			i++;
