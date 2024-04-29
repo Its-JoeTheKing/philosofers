@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/26 12:01:52 by codespace        ###   ########.fr       */
+/*   Updated: 2024/04/26 15:38:46 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,20 @@ int	main(int argc, char *argv[])
 	init_program(argv, &program);
 	init_philos(philos, argv, &program);
 	program.philos = philos;
-	i = 0;
-	while (i < philos[0].num_of_philos)
+	i = -1;
+	while (++i < philos[0].num_of_philos)
 	{
 		if (pthread_create(&philos[i].thread, NULL, routine,
 			&philos[i]) != 0)
 			return (destroy_all(&program), -1);
-		i++;
 	}
 	monitoring(&program);
-	i = 0;
-	while (i++ < philos[0].num_of_philos)
-		pthread_join(philos[i].thread, NULL);
-	ft_usleep(10000);
+	i = -1;
+	while (++i < philos[0].num_of_philos)
+	{
+		if (pthread_join(philos[i].thread, NULL) != 0)
+			return (destroy_all(&program) ,0);
+	}
 	destroy_all(&program);
 	return (0);
 }

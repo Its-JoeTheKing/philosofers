@@ -6,11 +6,11 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 14:29:20 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/26 10:41:37 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/26 16:34:09 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 t_num	ft_atoi(const char *str)
 {

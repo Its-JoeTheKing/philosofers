@@ -6,11 +6,11 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 11:36:19 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/26 10:55:43 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/26 16:34:17 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 void	init_program(char **argv, t_program *pro)
 {

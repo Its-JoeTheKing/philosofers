@@ -6,11 +6,11 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:32:00 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/25 16:33:18 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/26 16:34:03 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 size_t	timestamp(void)
 {

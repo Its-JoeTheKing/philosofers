@@ -6,11 +6,11 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:03:37 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/26 10:59:13 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/04/26 16:34:00 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 void	write_message(t_philo *philo, char *msg)
 {
