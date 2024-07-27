@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/26 15:38:46 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/07/27 11:13:10 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[])
 	while (++i < philos[0].num_of_philos)
 	{
 		if (pthread_create(&philos[i].thread, NULL, routine,
-			&philos[i]) != 0)
+				&philos[i]) != 0)
 			return (destroy_all(&program), -1);
 	}
 	monitoring(&program);
@@ -35,7 +35,7 @@ int	main(int argc, char *argv[])
 	while (++i < philos[0].num_of_philos)
 	{
 		if (pthread_join(philos[i].thread, NULL) != 0)
-			return (destroy_all(&program) ,0);
+			return (destroy_all(&program), 0);
 	}
 	destroy_all(&program);
 	return (0);
