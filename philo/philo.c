@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/08/10 10:58:16 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/08/10 11:26:36 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	destroy_all(t_program *data)
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
+	free(data->philos);
 }
