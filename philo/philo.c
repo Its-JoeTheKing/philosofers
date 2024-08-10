@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:53:11 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/07/27 11:13:10 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/08/10 10:58:16 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	main(int argc, char *argv[])
 {
-	t_philo			philos[PHILO_MAX];
+	t_philo			*philos;
 	t_program		program;
 	int				i;
 
-	if (!check_input(argv, argc))
+	(1) && (i = -1, philos = NULL);
+	if (!check_input(argv, argc, &philos))
 		return (-1);
 	init_program(argv, &program);
 	init_philos(philos, argv, &program);
 	program.philos = philos;
-	i = -1;
 	while (++i < philos[0].num_of_philos)
 	{
 		if (pthread_create(&philos[i].thread, NULL, routine,

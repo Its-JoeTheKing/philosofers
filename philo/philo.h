@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/01 11:20:24 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/26 11:52:20 by codespace        ###   ########.fr       */
+/*   Created: 2024/08/10 09:44:05 by aerrfig           #+#    #+#             */
+/*   Updated: 2024/08/10 11:23:33 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_program
 
 size_t	timestamp(void);
 void	ft_usleep(int n);
-int		check_input(char **str, int ac);
+int		check_input(char **str, int ac, t_philo **philos);
 t_num	ft_atoi(const char *str);
 void	init_program(char **argv, t_program *pro);
 void	init_philos(t_philo *philos, char **argv, t_program *program);

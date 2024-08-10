@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 14:29:20 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/04/26 16:34:09 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/08/10 10:59:02 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,28 @@ int	check_str(char *str)
 	return (1);
 }
 
-int	check_input(char **str, int ac)
+int	check_input(char **str, int ac, t_philo **philos)
 {
 	int	i;
 
 	i = 1;
 	if (ac < 5 || ac > 6)
-		return (0);
+		return (write(2, "invalid number of arguments", 28), 0);
 	while (i < ac)
 	{
 		if (!check_str(str[i]))
-			return (0);
+			return (write(2, "expecting only positive numbers", 27), 0);
 		if (i == 1 && (ft_atoi(str[i]).num > PHILO_MAX))
-			return (0);
-		if (ft_atoi(str[i]).is_flow == 1
-			|| (ft_atoi(str[i]).num <= 0 && i != 5))
-			return (0);
+			return (write(2,
+					"number of philosophers shoud be between 1 - 200", 48), 0);
+		if (ft_atoi(str[i]).is_flow == 1)
+			return (write(2, "invalid argument (overflow)", 40), 0);
 		if ((i > 1 && i < 5) && ft_atoi(str[i]).num < 60)
-			return (0);
+			return (write(2, "times should not be lower than 60 ms", 37), 0);
 		i++;
 	}
+	*philos = malloc(sizeof(struct s_philo) * (ft_atoi(str[1]).num + 1));
+	if (!*philos)
+		return (0);
 	return (1);
 }
