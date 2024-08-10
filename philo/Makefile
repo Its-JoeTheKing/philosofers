@@ -1,6 +1,6 @@
 CC = cc
 RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror -pthread -g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread
 srcs = init.c parsing.c timing.c routine.c monitoring.c philo.c
 ob_utils = ${srcs:.c=.o}
 header = philo.h

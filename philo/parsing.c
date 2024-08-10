@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 14:29:20 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/08/10 10:59:02 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/08/10 11:31:09 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int	check_input(char **str, int ac, t_philo **philos)
 	{
 		if (!check_str(str[i]))
 			return (write(2, "expecting only positive numbers", 27), 0);
-		if (i == 1 && (ft_atoi(str[i]).num > PHILO_MAX))
+		if (i == 1
+			&& (ft_atoi(str[i]).num > PHILO_MAX || ft_atoi(str[i]).num <= 0))
 			return (write(2,
 					"number of philosophers shoud be between 1 - 200", 48), 0);
 		if (ft_atoi(str[i]).is_flow == 1)
