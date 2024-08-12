@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 09:44:05 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/08/10 11:23:33 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/08/12 11:09:00 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_program
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	write_lock;
 	t_philo			*philos;
-	pthread_mutex_t	forks[PHILO_MAX];
+	pthread_mutex_t	*forks;
 }					t_program;
 
 size_t	timestamp(void);

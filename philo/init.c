@@ -6,7 +6,7 @@
 /*   By: aerrfig <aerrfig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 11:36:19 by aerrfig           #+#    #+#             */
-/*   Updated: 2024/08/10 10:56:17 by aerrfig          ###   ########.fr       */
+/*   Updated: 2024/08/12 11:13:45 by aerrfig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void	init_program(char **argv, t_program *pro)
 	pthread_mutex_init(&pro->dead_lock, NULL);
 	pthread_mutex_init(&pro->meal_lock, NULL);
 	pthread_mutex_init(&pro->write_lock, NULL);
+	pro->forks = malloc(sizeof(pthread_mutex_t) * ft_atoi(argv[1]).num);
+	if (!(*pro).forks)
+		destroy_all(pro);
 	while (i < ft_atoi(argv[1]).num)
 	{
 		pthread_mutex_init(&pro->forks[i], NULL);
